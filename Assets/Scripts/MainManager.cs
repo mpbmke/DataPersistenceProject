@@ -25,6 +25,7 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PersistentData.Data.LoadHighScore();
         _playerName = PersistentData.Data.GetPlayerName();
         UpdateHighScore();
 
@@ -51,7 +52,7 @@ public class MainManager : MonoBehaviour
             _highScorePlayer = PersistentData.Data.GetHighScorePlayerName();
             _highScore = PersistentData.Data.GetHighScore();
 
-            _highScoreText.text = "High Score: " + _highScore + " by " + _playerName;
+            _highScoreText.text = "High Score: " + _highScore + " by " + _highScorePlayer;
         }
         else
         {
@@ -97,6 +98,7 @@ public class MainManager : MonoBehaviour
         {
             PersistentData.Data.SetHighScore(m_Points);
             PersistentData.Data.SetHighScorePlayer(_playerName);
+            PersistentData.Data.SaveHighScore();
             UpdateHighScore();
         }
         Debug.Log("New High Score Player: " + PersistentData.Data.GetHighScorePlayerName());
