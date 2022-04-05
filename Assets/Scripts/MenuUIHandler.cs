@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuUIHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] TMP_InputField _playerNameInput;
+
     void Start()
     {
-        
+        if (_playerNameInput == null)
+            Debug.LogError("TMP_InputField is null");
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -20,6 +22,8 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartNew()
     {
+        PersistentData.Data.SetPlayerName(_playerNameInput.text);
+        Debug.Log(PersistentData.Data.GetPlayerName());
         SceneManager.LoadScene(1);
     }
 
